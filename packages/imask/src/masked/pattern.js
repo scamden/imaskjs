@@ -225,6 +225,10 @@ class MaskedPattern extends Masked<string> {
     super.value = value;
   }
 
+  get displayValue (): string {
+    return this._blocks.reduce((str, b) => str += b.displayValue, '');
+  }
+
   /**
     @override
   */

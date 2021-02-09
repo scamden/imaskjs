@@ -35,11 +35,15 @@ class PatternFixedDefinition implements PatternBlock {
   }
 
   get value (): string {
+    return this.char;
+  }
+
+  get displayValue (): string {
     return this._value;
   }
 
   get unmaskedValue (): string {
-    return this.isUnmasking ? this.value : '';
+    return this.isUnmasking ? this._value : '';
   }
 
   reset () {

@@ -14,6 +14,7 @@ import {type Direction} from '../../core/utils.js';
 export
 interface PatternBlock {
   +value: string;
+  +displayValue: string;
   +unmaskedValue: string;
   +isComplete: boolean;
   +lazy?: boolean;

@@ -39,7 +39,16 @@
   <script type="text/javascript">
     var testNumberMask = Number;
     var testDateMask = {
-      mask: Date
+      mapToRadix: ['.'],
+      mask: Number,
+      max: 9999999.99,
+      min: 0,
+      normalizeZeros: true,
+      padFractionalZeros: false,
+      radix: '.',
+      scale: 2,
+      signed: false,
+      thousandsSeparator: ','
     };
     var app = new Vue({
       el: '#app',

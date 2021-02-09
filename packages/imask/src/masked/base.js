@@ -127,6 +127,10 @@ class Masked<MaskType> {
     this.resolve(value);
   }
 
+  get displayValue (): string {
+    return this.value;
+  }
+
   /** Resolve new value */
   resolve (value: string): string {
     this.reset();

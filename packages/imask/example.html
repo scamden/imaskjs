@@ -4,37 +4,74 @@
 <body>
   <h1>IMask Core Demo</h1>
   <input type="text" id="input">
+  <button id="button">changeOptions</button>
   <div contenteditable="true" id="ce"></div>
+  <input id="date-overwrite-mask" type="text" value="10.10.2020">
 
   <script src="dist/imask.js"></script>
   <script type="text/javascript">
-    class MaskedCurrency extends IMask.MaskedPattern {
-      get typedValue () {
-        return this.maskedBlock('d').typedValue;
-      }
-      set typedValue (num) {
-        this.maskedBlock('d').typedValue = num;
-      }
-    }
-    const currencyMask = new MaskedCurrency({
-      mask: '000$d',
-      lazy: false,
-      blocks: {
-        d: {
-          mask: Number,
-          thousandsSeparator: '.',
-          radix: ',',
-          scale: 2,
-          signed: false,
-          mapToRadix: ['.']
-        },
+    // const masked = IMask(document.getElementById('input'), {
+    //   mask: '+{7} (000) 000 00 00',
+    // });
+
+    // let lazy = true;
+
+    // document.querySelector("#button").addEventListener("click", e => {
+    //   masked.updateOptions({
+    //     lazy: lazy
+    //   });
+    //   lazy = !lazy;
+    // });
+
+    // class MaskedCurrency extends IMask.MaskedPattern {
+    //   get typedValue () {
+    //     return this.maskedBlock('d').typedValue;
+    //   }
+    //   set typedValue (num) {
+    //     this.maskedBlock('d').typedValue = num;
+    //   }
+    // }
+    // const currencyMask = new MaskedCurrency({
+    //   mask: '000$d',
+    //   lazy: false,
+    //   blocks: {
+    //     d: {
+    //       mask: Number,
+    //       thousandsSeparator: '.',
+    //       radix: ',',
+    //       scale: 2,
+    //       signed: false,
+    //       mapToRadix: ['.']
+    //     },
+    //   },
+    // })
+    // var imask = IMask(document.getElementById('ce'), {
+    //   mask: currencyMask,
+    // }).on('accept', () => {
+    //   console.log(imask.value, imask.unmaskedValue, imask.typedValue);
+    // });
+
+    var overwriteMask = IMask(
+      document.getElementById('date-overwrite-mask'),
+      {
+        mask: Date,
+        lazy: false,
+        overwrite: true,
+        autofix: true,
+        min: new Date(),
+        max: new Date(2020,12,31),
+
+    parse: function (str) {
+    console.log(str);
       },
-    })
-    var imask = new IMask(document.getElementById('ce'), {
-      mask: currencyMask,
-    }).on('accept', () => {
-      console.log(imask.value, imask.unmaskedValue, imask.typedValue);
-    });
+
+        blocks: {
+          d: {mask: IMask.MaskedRange, placeholderChar: 'd', from: 1, to: 31, maxLength: 2},
+          m: {mask: IMask.MaskedRange, placeholderChar: 'm', from: 1, to: 12, maxLength: 2},
+          Y: {mask: IMask.MaskedRange, placeholderChar: 'y', from: 2020, to: 2020, maxLength: 4}
+        }
+      }
+    );
   </script>
 </body>
 </html>

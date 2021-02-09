@@ -79,6 +79,10 @@ class PatternInputDefinition implements PatternBlock {
         '');
   }
 
+  get displayValue (): string {
+    return this.value;
+  }
+
   get unmaskedValue (): string {
     return this.masked.unmaskedValue;
   }
